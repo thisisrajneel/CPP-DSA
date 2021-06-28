@@ -41,10 +41,10 @@ void insertAtHead(node* &head, int val) {
 void display(node* head) {
     while (head!=NULL)
     {
-        cout << head->data << ' ';
+        cout << head->data << "->";
         head = head->next;
     }
-    cout<<endl;
+    cout<<"NULL"<<endl;
     
 }
 
@@ -60,14 +60,50 @@ bool search(node* head, int key) {
     return false;
 }
 
+void deletion(node* &head, int val) {
+    
+    if(head == NULL) {
+        return;
+    }
+    if(head->next==NULL) {
+        node* todelete = head;
+        head = head->next;
+
+        delete todelete;
+        return;
+    }
+    node* temp = head;
+
+    while (temp->next->data!=val)
+    {
+        temp = temp->next;
+    }
+    
+    node* todelete = temp->next;
+    temp->next = temp->next->next;
+    
+    delete todelete;    
+}
+
+void deleteAtHead(node* &head) {
+    node* todelete = head;
+    head = head->next;
+
+    delete todelete;
+}
+
 int main() {
 
     node *head = NULL;
     insertAtHead(head, 2);
-    insertAtHead(head, 12);
+    insertAtTail(head, 12);
     insertAtHead(head, 4);
-    insertAtHead(head, 67);
+    insertAtTail(head, 67);
     display(head);
     cout<<search(head, 4);
+    deletion(head, 12);
+    display(head);
+    deleteAtHead(head);
+    display(head);
     return 0;
 }
