@@ -129,6 +129,27 @@ node* recurReverse(node* &head) {
 
 }
 
+node* reverseKnodes(node* &head, int k) {
+    node* prevptr = NULL;
+    node* current = head;
+    node* nextptr;
+    int count = 0;
+
+    while (current!=NULL && count<k)
+    {
+        nextptr = current->next;
+        current->next = prevptr;
+        prevptr = current;
+        current = nextptr;
+
+        count++;
+    }
+    if(nextptr!=NULL) {
+        head->next = reverseKnodes(nextptr, k);
+    }
+    return prevptr;
+}
+
 int main() {
 
     node *head = NULL;
@@ -144,7 +165,14 @@ int main() {
     display(head);
     iterativeReverse(head);
     display(head);
-    recurReverse(head); // not working properly
+    head = recurReverse(head);
+    display(head);
+    insertAtHead(head, 2);
+    insertAtTail(head, 12);
+    insertAtHead(head, 4);
+    insertAtTail(head, 67);
+    display(head);
+    head = reverseKnodes(head, 2);
     display(head);
     return 0;
 }
