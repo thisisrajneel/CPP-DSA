@@ -92,6 +92,43 @@ void deleteAtHead(node* &head) {
     delete todelete;
 }
 
+void iterativeReverse(node* &head) {
+
+    node* current = head;
+    node* before = NULL;
+    node* after;
+
+    if(current == NULL) {
+        cout<<"empty list";
+    }
+
+    while (current!=NULL)
+    {
+        after = current->next;
+        current->next = before;
+
+        before = current;
+        current = after;
+    }
+
+    head = before;
+
+}
+
+node* recurReverse(node* &head) {
+    
+    if(head==NULL || head->next==NULL) {
+        return head;
+    }
+    
+    node* newhead = recurReverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+
+    return newhead;
+
+}
+
 int main() {
 
     node *head = NULL;
@@ -104,6 +141,10 @@ int main() {
     deletion(head, 12);
     display(head);
     deleteAtHead(head);
+    display(head);
+    iterativeReverse(head);
+    display(head);
+    recurReverse(head); // not working properly
     display(head);
     return 0;
 }
