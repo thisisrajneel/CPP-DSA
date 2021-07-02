@@ -181,6 +181,24 @@ void makeCycle(node* &head, int pos) {
     temp->next = startNode;
 }
 
+void removeCycle(node* &head) {
+    node* slow = head;
+    node* fast = head;
+
+    do
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    } while (slow!=fast);
+    
+    fast = head;
+    while(slow->next!=fast->next) {
+        slow = slow->next;
+        fast = fast->next;
+    }
+    slow->next = NULL;
+}
+
 int main() {
 
     node *head = NULL;
@@ -207,5 +225,7 @@ int main() {
     display(head);
     makeCycle(head, 2);
     cout << detectCycle(head);
+    removeCycle(head);
+    display(head);
     return 0;
 }
