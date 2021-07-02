@@ -150,6 +150,37 @@ node* reverseKnodes(node* &head, int k) {
     return prevptr;
 }
 
+bool detectCycle(node* &head) {
+    node* slow = head;
+    node* fast = head;
+
+    while(fast!=NULL && fast->next!=NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(fast == slow) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void makeCycle(node* &head, int pos) {
+    node* temp = head;
+    node* startNode;
+    int count = 1;
+    while(temp->next!=NULL) {
+        if(count == pos) {
+            startNode = temp;
+        }
+        temp = temp->next;
+        count++;
+    }
+
+    temp->next = startNode;
+}
+
 int main() {
 
     node *head = NULL;
@@ -174,5 +205,7 @@ int main() {
     display(head);
     head = reverseKnodes(head, 2);
     display(head);
+    makeCycle(head, 2);
+    cout << detectCycle(head);
     return 0;
 }
