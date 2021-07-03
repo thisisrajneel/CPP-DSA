@@ -199,6 +199,43 @@ void removeCycle(node* &head) {
     slow->next = NULL;
 }
 
+int length(node* head) {
+    int l = 0;
+    node* temp = head;
+    while (temp!=NULL)
+    {
+        l++;
+        temp = temp->next;
+    }
+    return l;
+}
+
+node* appendLastK(node* head, int k) {
+    int l = length(head);
+    k = k%l; // if k>l
+    int count = 1;
+    
+    node* tail = head;
+    node* newhead;
+    node* newtail;
+    
+    while(tail->next!=NULL) {
+        if(count == (l-k)) {
+            newtail = tail;
+        }
+        if(count == l-k+1) {
+            newhead = tail;
+        }
+        tail = tail->next;
+        count++;
+    }
+
+    newtail->next = NULL;
+    tail->next = head;
+
+    return newhead;
+}
+
 int main() {
 
     node *head = NULL;
@@ -216,16 +253,18 @@ int main() {
     display(head);
     head = recurReverse(head);
     display(head);
+    insertAtHead(head, 0);
+    insertAtTail(head, 1);
     insertAtHead(head, 2);
-    insertAtTail(head, 12);
-    insertAtHead(head, 4);
-    insertAtTail(head, 67);
+    insertAtTail(head, 3);
     display(head);
     head = reverseKnodes(head, 2);
     display(head);
     makeCycle(head, 2);
     cout << detectCycle(head);
     removeCycle(head);
+    display(head);
+    head = appendLastK(head, 3);
     display(head);
     return 0;
 }
