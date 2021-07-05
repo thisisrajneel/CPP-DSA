@@ -236,6 +236,75 @@ node* appendLastK(node* head, int k) {
     return newhead;
 }
 
+int intersection(node* &head1, node* &head2) { // detect intersection and return data of node
+    int l1 = length(head1);
+    int l2 = length(head2);
+
+    int d = 0;
+    node* ptr1; // points to the longer list
+    node* ptr2;
+    if(l1>l2) {
+        ptr1 = head1;
+        ptr2 = head2;
+        d = l1-l2;
+    }
+    else {
+        ptr1 = head2;
+        ptr2 = head1;
+        d = l2-l1;
+    }
+    while(d) {
+        ptr1 = ptr1->next;
+        if(ptr1 == NULL) {
+            return -1;
+        }
+        d--;
+    }
+    while(ptr1!=NULL && ptr2!=NULL) {
+        if(ptr1 == ptr2) {
+            return ptr1->data;
+        }
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+
+    return -1;
+}
+
+void intersect(node* &head1, node* &head2, int pos) {
+    node* temp1 = head1;
+    pos--;
+    while(pos--) {
+        temp1 = temp1->next;
+    }
+    node* temp2 = head2;
+    while(temp2->next!=NULL) {
+        temp2 = temp2->next;
+    }
+    temp2->next = temp1;
+}
+
+void evenAfterOdd(node* & head) {
+    node* odd = head;
+    node* even  = head->next;
+    node* evenstart = even;
+
+    while (even->next!=NULL && odd->next!=NULL)
+    {
+        odd->next = even->next;
+        odd = odd->next;
+
+        even->next = odd->next;
+        even = even->next;
+    }
+
+    odd->next = evenstart;
+    if(odd->next!=NULL) {
+        even->next = NULL;
+    }
+    
+}
+
 int main() {
 
     node *head = NULL;
@@ -265,6 +334,15 @@ int main() {
     removeCycle(head);
     display(head);
     head = appendLastK(head, 3);
+    display(head);
+    // node* head2 = NULL; // for intersection
+    // insertAtTail(head2, 7);
+    // insertAtTail(head2, 8);
+    // intersect(head, head2, 4);
+    // display(head);
+    // display(head2);
+    // cout << intersection(head, head2);
+    evenAfterOdd(head);
     display(head);
     return 0;
 }
