@@ -13,7 +13,7 @@ class node {
     }
 };
 
-void insertAtTail(node *head, int val) {
+void insertAtTail(node* &head, int val) {
        
     node *n = new node(val);
 
