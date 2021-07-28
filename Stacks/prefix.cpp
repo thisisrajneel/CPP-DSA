@@ -3,7 +3,7 @@
 #include<math.h>
 using namespace std;
 
-void prefixevaluate(string s) {
+int prefixevaluate(string s) {
     stack<int> st;
     for (int i = s.length()-1; i >=0; i++)
     {
@@ -37,12 +37,12 @@ void prefixevaluate(string s) {
         }
     }
     
-    cout << st.top();
+    return st.top();
 }
 
 int main() {
     
-    prefixevaluate("+57");
+    cout << prefixevaluate("*5+57");
     
     return 0;
 }
