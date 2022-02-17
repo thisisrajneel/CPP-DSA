@@ -4,8 +4,8 @@ using namespace std;
 int main() {
     
     // finding max and min in an array
-
-    int arr[10],n;
+    int n;
+    int arr[n];
     int min, max;
 
     cout<<"enter number of terms :";
