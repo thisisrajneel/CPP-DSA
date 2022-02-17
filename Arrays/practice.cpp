@@ -5,7 +5,7 @@ int main() {
     
     // finding max and min in an array
     int n;
-    int arr[n];
+    int arr[100];
     int min, max;
 
     cout<<"enter number of terms :";
