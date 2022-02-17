@@ -12,7 +12,7 @@ void swap(int arr[], int n) {
 }
 
 int main() {
-    int arr[100],n;
+    int arr[50],n;
     cout<<"enter number of terms :";
     cin>>n;
 
@@ -20,13 +20,11 @@ int main() {
     {
         cin>>arr[i];
     }
-    
     swap(arr, n);
     cout<<endl;
     for (int j = 0; j < n; j++)
     {
         cout<<arr[j]<<" ";
     }
-    
     return 0;
 }
