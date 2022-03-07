@@ -3,7 +3,7 @@ using namespace std;
 
 int firstOccurence(vector<int> arr, int k) {
     int start = 0;
-    int end = arr.size();
+    int end = arr.size()-1;
     int ans;
 
     while (start<=end)
@@ -27,7 +27,7 @@ int firstOccurence(vector<int> arr, int k) {
 
 int lastOccurence(vector<int> arr, int k) {
     int start = 0;
-    int end = arr.size();
+    int end = arr.size()-1;
     int ans;
 
     while (start<=end)
